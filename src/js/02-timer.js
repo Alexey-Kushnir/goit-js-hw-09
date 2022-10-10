@@ -17,7 +17,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0] > new Date()) {
+    if (selectedDates[0].getTime() > Date.now()) {
       buttonStart.disabled = false;
     } else {
       Notiflix.Notify.init({ position: 'center-center' });
@@ -36,7 +36,7 @@ class Timer {
   }
 
   start() {
-    const startTime = new Date(input.value);
+    const startTime = new Date(input.value).getTime();
     buttonStart.disabled = true;
 
     this.intervalId = setInterval(() => {
