@@ -13,6 +13,7 @@ function submitForm(e) {
   e.preventDefault();
   for (let i = 0; i < Number(inputAmount.value); i += 1) {
     promisePosition += 1;
+    // console.log(promisePosition);
     delayStepCounter = Number(inputDelay.value) + Number(inputStep.value) * i;
 
     createPromise(promisePosition, delayStepCounter)
