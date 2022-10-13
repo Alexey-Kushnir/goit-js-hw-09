@@ -16,17 +16,23 @@ function submitForm(e) {
   const inputAmount = Number(amount.value);
   let delayStep = inputDelay;
 
-  for (let i = 1; i <= inputAmount; i += 1) {
-    let promisePosition = i;
+  if (inputDelay <= 0 || inputStep <= 0 || inputAmount <= 0) {
+    Notiflix.Notify.failure(`ERROR`);
+  } else {
+    for (let i = 1; i <= inputAmount; i += 1) {
+      let promisePosition = i;
 
-    createPromise(promisePosition, delayStep)
-      .then(({ position, delay }) => {
-        Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
-      })
-      .catch(({ position, delay }) => {
-        Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`);
-      });
-    delayStep += inputStep;
+      createPromise(promisePosition, delayStep)
+        .then(({ position, delay }) => {
+          Notiflix.Notify.success(
+            `Fulfilled promise ${position} in ${delay}ms`
+          );
+        })
+        .catch(({ position, delay }) => {
+          Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`);
+        });
+      delayStep += inputStep;
+    }
   }
 }
 
